@@ -31,6 +31,10 @@ export default defineConfig({
       }
       return cfg
     })(),
+    // Ensure Vitest resolves '@' alias during test runs (helpful for CI environments)
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
   },
   resolve: {
     alias: {
