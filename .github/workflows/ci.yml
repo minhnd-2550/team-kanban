@@ -29,6 +29,24 @@ jobs:
           node-version: 20
           cache: pnpm
 
+      - name: Restore pnpm store cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+      - name: Clear pnpm caches (ensure fresh install)
+        run: |
+          pnpm cache clean --all || true
+          pnpm store prune || true
+          rm -rf node_modules || true
+
+      - name: Print environment versions
+        run: |
+          node -v
+          pnpm -v
+          pnpm list vite --depth 0 || true
+
       - run: pnpm install --frozen-lockfile
 
       - run: pnpm lint
@@ -47,6 +65,24 @@ jobs:
         with:
           node-version: 20
           cache: pnpm
+
+      - name: Restore pnpm store cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+      - name: Clear pnpm caches (ensure fresh install)
+        run: |
+          pnpm cache clean --all || true
+          pnpm store prune || true
+          rm -rf node_modules || true
+
+      - name: Print environment versions
+        run: |
+          node -v
+          pnpm -v
+          pnpm list vite --depth 0 || true
 
       - run: pnpm install --frozen-lockfile
 
@@ -69,6 +105,24 @@ jobs:
         with:
           node-version: 20
           cache: pnpm
+
+      - name: Restore pnpm store cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+      - name: Clear pnpm caches (ensure fresh install)
+        run: |
+          pnpm cache clean --all || true
+          pnpm store prune || true
+          rm -rf node_modules || true
+
+      - name: Print environment versions
+        run: |
+          node -v
+          pnpm -v
+          pnpm list vite --depth 0 || true
 
       - run: pnpm install --frozen-lockfile
 

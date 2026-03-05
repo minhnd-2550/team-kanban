@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { useUiStore } from '../../../src/store/uistore'
+import { useUiStore } from '@/store/uistore'
 
 describe('uiStore', () => {
   it('open and close card', () => {
