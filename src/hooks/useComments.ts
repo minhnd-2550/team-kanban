@@ -1,6 +1,6 @@
 'use client'
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import * as commentService from '@/services/commentService'
 import { useCard } from '@/hooks/useCards'
 import type { Comment } from '@/types'

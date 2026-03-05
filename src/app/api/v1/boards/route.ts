@@ -6,8 +6,8 @@ import { CreateBoardSchema } from '@/lib/validators/boardSchemas'
 // GET /api/v1/boards — list boards where the user is a member
 export async function GET(_request: NextRequest) {
   const supabase = await getSupabaseServerClient()
-  const { user, errorResponse } = await requireAuth(supabase)
-  if (errorResponse) return errorResponse
+  const auth = await requireAuth(supabase)
+  if (auth.errorResponse) return auth.errorResponse
 
   const { data, error } = await supabase
     .from('boards')
@@ -15,7 +15,7 @@ export async function GET(_request: NextRequest) {
       id, name, owner_id, created_at, updated_at,
       board_members!inner(user_id)
     `)
-    .eq('board_members.user_id', user.id)
+    .eq('board_members.user_id', auth.user.id)
     .order('created_at', { ascending: false })
 
   if (error) return apiError(ApiErrorCode.INTERNAL_ERROR, error.message, 500)
@@ -26,8 +26,8 @@ export async function GET(_request: NextRequest) {
 // POST /api/v1/boards — create a new board + seed 3 default columns
 export async function POST(request: NextRequest) {
   const supabase = await getSupabaseServerClient()
-  const { user, errorResponse } = await requireAuth(supabase)
-  if (errorResponse) return errorResponse
+  const auth = await requireAuth(supabase)
+  if (auth.errorResponse) return auth.errorResponse
 
   const body = await request.json()
   const parsed = CreateBoardSchema.safeParse(body)

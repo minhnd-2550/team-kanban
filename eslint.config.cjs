@@ -1,6 +1,6 @@
 module.exports = [
   {
-    ignores: ['node_modules/**'],
+    ignores: ['node_modules/**', 'dist/**', '.next/**', 'out/**', 'coverage/**'],
   },
   {
     files: ['**/*.ts', '**/*.tsx'],
@@ -19,4 +19,12 @@ module.exports = [
       '@typescript-eslint/consistent-type-imports': 'error',
     },
   },
-]
+  // Relax strict rules for test files
+  {
+    files: ['tests/**/*.ts', 'tests/**/*.tsx'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+    },
+  },
+];

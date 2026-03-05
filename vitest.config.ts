@@ -9,9 +9,8 @@ export default defineConfig({
     include: ['tests/unit/**/*.test.ts'],
     exclude: ['tests/e2e/**', 'node_modules/**'],
     coverage: (() => {
-      const isCI = !!(process.env.CI || process.env.GITHUB_ACTIONS)
       // Only include source files that are covered by unit tests (keep Next app pages out)
-      const cfg: any = {
+      const cfg = {
         provider: 'v8',
         include: [
           'src/lib/**/*.ts',
